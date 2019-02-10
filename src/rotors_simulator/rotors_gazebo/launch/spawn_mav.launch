@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="mav_name" default="ardrone"/>
+  <arg name="namespace" default="$(arg mav_name)"/>
+  <arg name="model" default="$(find rotors_description)/urdf/$(arg mav_name)_base.xacro"/>
+  <arg name="tf_prefix" default="$(optenv ROS_NAMESPACE)"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.1"/>
+  <arg name="enable_logging" default="true"/>
+  <arg name="enable_ground_truth" default="true"/>
+  <arg name="enable_camera" default="true"/>
+  <arg name="log_file" default="$(arg mav_name)"/>
+  <arg name="wait_to_record_bag" default="false"/>
+  <arg name="enable_mavlink_interface" default="true"/>
+  <arg name="cam3" default="cam_3" />
+   <arg name="cam4" default="cam_4" />
+  <arg name="manager" /> <!-- Must be globally qualified -->
+  <arg name="respawn" default="false" />
+
+  <!-- send the robot XML to param server -->
+  <param name="robot_description" command="
+    $(find xacro)/xacro.py '$(arg model)'
+    enable_logging:=$(arg enable_logging)
+    enable_ground_truth:=$(arg enable_ground_truth)
+    enable_mavlink_interface:=$(arg enable_mavlink_interface)
+    enable_camera:=$(arg enable_camera)
+    log_file:=$(arg log_file)
+    wait_to_record_bag:=$(arg wait_to_record_bag)
+    mav_name:=$(arg mav_name)
+    namespace:=$(arg namespace)"
+  />
+  <param name="tf_prefix" type="string" value="$(arg tf_prefix)" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_$(arg namespace)" pkg="gazebo_ros" type="spawn_model"
+   args="-param robot_description
+         -urdf
+         -x $(arg x)
+         -y $(arg y)
+         -z $(arg z)
+         -model $(arg namespace)"
+   respawn="false" output="screen">
+  </node>
+  
+ <!--  <node pkg="image_view" type="image_view" name="image_view" >
+    <remap from="image" to="/$(arg mav_name)/camera_/image_raw" />
+
+   </node> -->
+    
+    <!--<node name="image_proc" pkg="image_proc" type="image_proc" ns="right">
+   </node>-->
+    
+  <!-- <group ns="cam" >  
+    <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc">
+      <param name="approximate_sync" value="true"/>
+      <param name="queue_size" value="10"/>
+      <remap from="left/image_raw" to="left/image_raw3"/>
+      <remap from="right/image_raw" to="right/image_raw3"/>
+    </node> 
+     </group>-->
+ 
+    <include file="$(find rotors_gazebo)/launch/cam.launch" >
+      <arg name="cam_type" value="cam_3" />
+      <arg name="img_type" value="image_raw3" />
+    </include> 
+ 
+     
+   <!-- <arg name="marker_size" default="30.48" />
+    <arg name="max_new_marker_error" default="0.08" />
+    <arg name="max_track_error" default="0.2" />-->
+    
+    
+   
+     
+     
+</launch>

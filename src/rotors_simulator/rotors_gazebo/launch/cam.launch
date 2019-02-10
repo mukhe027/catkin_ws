@@ -1,0 +1,25 @@
+<launch>
+
+
+  <arg name="img_type"/>
+  <arg name="cam_type"/>
+ 
+  <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" >
+    <param name="approximate_sync" value="true"/>
+    <param name="queue_size" value="10"/>
+    <remap from="left/image_raw" to="left/$(arg img_type)"/>
+    <remap from="right/image_raw" to="right/$(arg img_type)"/>
+  </node> 
+  
+   <node pkg="image_view" type="image_view" name="image_view" >
+    <remap from="image" to="/ardrone/right/image_raw3" />
+
+   </node> 
+ <!-- <include file="$(find apriltags_ros)/launch/example.launch">
+  </include>-->
+
+
+
+
+
+</launch>
