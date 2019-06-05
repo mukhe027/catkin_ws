@@ -31,8 +31,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg log_file)"/>
-      <arg name="x" default="5.5"/>
-      <arg name="y" default="-4.0"/>
+      <arg name="x" default="4.15"/>
+      <arg name="y" default="1.15"/>
       <arg name="z" default="0.1"/>
       <arg name="mav_name_yaml" default="$(arg mav_name)"/>
     </include>
@@ -59,8 +59,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg log_file)"/>
-      <arg name="x" default="3.0"/>
-      <arg name="y" default="2.5"/>
+      <arg name="x" default="2.15"/>
+      <arg name="y" default="-2.85"/>
       <arg name="z" default="0.1"/>
     </include>
 
@@ -85,8 +85,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg log_file)"/>
-      <arg name="x" default="5.5"/>
-      <arg name="y" default="0.0"/>
+      <arg name="x" default="6.15"/>
+      <arg name="y" default="-2.85"/>
       <arg name="z" default="0.1"/>
     </include>
 
@@ -111,7 +111,7 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg log_file)"/>
-      <arg name="x" default="9.5"/>
+      <arg name="x" default="10.0"/>
       <arg name="y" default="0.0"/>
       <arg name="z" default="0.1"/>
     </include>
